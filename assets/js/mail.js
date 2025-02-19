@@ -4,7 +4,6 @@
 
 let isAR = document.dir === "rtl";
 
-
 // Translation object
 const translations = {
     emailLimitReached: isAR ? "لقد وصلت إلى الحد الأقصى لعدد الرسائل الإلكترونية!" : "Email Limit Reached!",
