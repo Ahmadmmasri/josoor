@@ -2,6 +2,20 @@
     emailjs.init("DTj1fXmGPJsMg2K0K");
 })();
 
+let isAR = document.dir === "rtl";
+
+
+// Translation object
+const translations = {
+    emailLimitReached: isAR ? "لقد وصلت إلى الحد الأقصى لعدد الرسائل الإلكترونية!" : "Email Limit Reached!",
+    emailLimitMessage: isAR ? "يمكنك إرسال رسالتين فقط في اليوم. يرجى المحاولة غدًا." : "You can only send two emails per day. Please try again tomorrow.",
+    missingFields: isAR ? "الرجاء تعبئة جميع الحقول." : "Please fill out all the fields.",
+    messageTooShort: isAR ? "يرجى إدخال 5 كلمات على الأقل في رسالتك." : "Please enter at least 5 words in your message.",
+    emailSentSuccess: isAR ? "تم إرسال الرسالة بنجاح!" : "Email Sent!",
+    emailSentMessage: isAR ? "تم إرسال رسالتك بنجاح." : "Your message has been sent successfully.",
+    errorMessage: isAR ? "حدث خطأ. يرجى المحاولة لاحقًا." : "Something went wrong. Please try later."
+};
+
 document.getElementById("contact-form").addEventListener("submit", function(event) {
     event.preventDefault();
 
@@ -15,8 +29,8 @@ document.getElementById("contact-form").addEventListener("submit", function(even
     if (emailSentCount.lastSentDate === currentDate && emailSentCount.count >= 2) {
         Swal.fire({
             icon: 'info',
-            title: 'Email Limit Reached!',
-            text: 'You can only send two emails per day. Please try again tomorrow.',
+            title: translations.emailLimitReached,
+            text: translations.emailLimitMessage,
             confirmButtonText: 'OK'
         });
         return;
@@ -32,11 +46,10 @@ document.getElementById("contact-form").addEventListener("submit", function(even
     const templateID = "template_51k1gpp";
 
     // Validate that all fields are filled in
-    if(formData.from_name === "" || formData.from_mail === "" || formData.message === "") {
+    if (formData.from_name === "" || formData.from_mail === "" || formData.message === "") {
         Swal.fire({
             icon: 'warning',
-            title: 'Missing Information',
-            text: 'Please fill out all the fields.',
+            title: translations.missingFields,
             confirmButtonText: 'OK'
         });
         return;
@@ -47,8 +60,7 @@ document.getElementById("contact-form").addEventListener("submit", function(even
     if (messageWordsCount < 5) {
         Swal.fire({
             icon: 'warning',
-            title: 'Message Too Short',
-            text: 'Please enter at least 5 words in your message.',
+            title: translations.messageTooShort,
             confirmButtonText: 'OK'
         });
         return;
@@ -72,8 +84,8 @@ document.getElementById("contact-form").addEventListener("submit", function(even
             document.getElementById("contact-form").reset();
             Swal.fire({
                 icon: 'success',
-                title: 'Email Sent!',
-                text: 'Your message has been sent successfully.',
+                title: translations.emailSentSuccess,
+                text: translations.emailSentMessage,
                 confirmButtonText: 'OK'
             });
         }, function(error) {
@@ -81,7 +93,7 @@ document.getElementById("contact-form").addEventListener("submit", function(even
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: 'Something went wrong. Please try later.',
+                text: translations.errorMessage,
                 confirmButtonText: 'OK'
             });
         });
