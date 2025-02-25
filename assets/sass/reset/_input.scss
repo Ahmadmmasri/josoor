@@ -348,10 +348,9 @@ textarea.form-control.is-invalid {
 
 
 
-@include xs {
-  .form-select,
-  .form-control {
-    padding-right: 30px;
-    padding-left: 15px;
-  }
-}
+
+
+// :dir(rtl){
+//   padding-left: unset;
+//   padding-right: 40px;
+// }
